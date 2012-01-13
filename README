@@ -1,0 +1,8 @@
+ShareaboutsWP
+-------------
+
+ShareaboutsWP is a simple mapping tool for gathering online input about places, inspired by it's big bro Shareabouts (https://github.com/openplans/shareabouts). ShareaboutsWP is a WordPress Theme that runs on PostgreSQL. Spatial database FTW!
+
+To get WordPress running on PostgreSQL, see:
+http://wordpress.org/extend/plugins/postgresql-for-wordpress/
+
