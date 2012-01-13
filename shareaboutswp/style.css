@@ -1,0 +1,969 @@
+/*
+Theme Name: ShareaboutsWP
+Author: Andy Cochran 
+Author URI: http://www.openplans.org/team#andy-cochran
+Description: 
+Version: 0.1
+*/
+
+/* html5doctor.com Reset Stylesheet \\v1.6.1 \\ Last Updated: 2010-09-17 \\ http://richclarkdesign.com \\ @rich_clark */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { display:block; }
+nav ul { list-style:none; }
+blockquote, q { quotes:none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+del { text-decoration: line-through; }
+abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help; }
+/* tables still need cellspacing="0" in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+hr { display:block; height:1px; border:0; border-top:1px solid rgba(140, 105, 105, 0.2); margin:1em 0; padding:0; }
+input, select { vertical-align:middle; }
+
+/*
+ *
+ * Base Typography 
+ *
+ */
+body { font:16px/1.25 sans-serif; *font-size:small; }
+select, input, textarea, button { font:99% sans-serif; }
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+/*
+ *
+ * Base Styles 
+ *
+ */
+body, select, input, textarea { 
+  color: #696f8c; 
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* Headers (h1,h2,etc) have no default font-size or margin,
+   you'll want to define those yourself. */ 
+h1,h2,h3,h4,h5,h6 { 
+  font-weight: bold;
+  color: #8c6969;
+  font-size: 24px;
+  margin-bottom: 0.5em;
+}
+/* always force a scrollbar in non-IE */ 
+html { overflow-y: scroll; }
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+a, a:active, a:visited { color: #4d68e9; }
+a:hover { color: #202540; }
+p { margin-bottom: 1.5em; }
+ul, ol { margin-left: 1.8em; margin-bottom: 0.75em; }
+ol { list-style-type: decimal; }
+li { margin-bottom: 0.75em; }
+/* Remove margins for navigation lists */
+nav ul, nav li { margin: 0; } 
+small { font-size: 85%; }
+strong, th { font-weight: bold; }
+td, td img { vertical-align: top; } 
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: super; font-size: smaller; }
+pre { 
+  padding: 15px; 
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; /* CSS2 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+}
+textarea { overflow: auto; } /* thnx ivannikolic! www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+.ie6 legend, .ie7 legend { margin-left: -7px; } /* thnx ivannikolic! */
+/* align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: middle; }
+.ie7 input[type="checkbox"] { vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+/* webkit browsers add a 2px margin outside the chrome of form elements */  
+button, input, select, textarea { margin: 0; }
+/* colors for form validity */
+input:valid, textarea:valid   {  }
+input:invalid, textarea:invalid { 
+      border-radius: 1px;
+    -moz-box-shadow: 0px 0px 5px red; 
+ -webkit-box-shadow: 0px 0px 5px red; 
+         box-shadow: 0px 0px 5px red;
+}
+.no-boxshadow input:invalid, 
+.no-boxshadow textarea:invalid { background-color: #f0dddd; }
+/* These selection declarations have to be separate.
+   No text-shadow: twitter.com/miketaylr/status/12228805301 
+   Also: hot pink. */
+::-moz-selection{ background: #deff40; color:#202540; text-shadow: none; }
+::selection { background:#deff40; color:#202540; text-shadow: none; } 
+/*  j.mp/webkit-tap-highlight-color */
+a:link { -webkit-tap-highlight-color: #deff40; } 
+/* make buttons play nice in IE:    
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {width: auto; overflow: visible;}
+/* bicubic resizing for non-native sized IMG: 
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/*
+ *
+ * Nonsemantic Base Styles 
+ *
+ */
+/* for image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+/* Hide for both screenreaders and browsers
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; } 
+/* Hide only visually, but have it available for screenreaders 
+   www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden  */
+.visuallyhidden { position: absolute !important;    
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px); }
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+.nowrap { white-space: nowrap; }
+/* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
+.clearfix:before, .clearfix:after {
+  content: "\0020"; display: block; height: 0; visibility: hidden;  
+} 
+.clearfix:after { clear: both; }
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+.clearfix { zoom: 1; }
+
+/*
+ *
+ * Media queries for responsive design
+ * These follow after primary styles so they will successfully override. 
+ *
+ */
+@media all and (orientation:portrait) { 
+  /* Style adjustments for portrait mode goes here */
+}
+@media all and (orientation:landscape) { 
+  /* Style adjustments for landscape mode goes here */
+}
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
+   Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width: 480px) {  
+  /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you
+     j.mp/textsizeadjust 
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
+}
+
+/*
+ *
+ * Structure
+ *
+ */
+body {
+  background: url(images/texture-dark.png) 0 0 repeat scroll;
+}
+#page {
+  display: block;
+  background: url(images/texture-light) 0 0 repeat scroll;
+  margin: 10px 0 0;
+  padding: 30px 0 60px;
+}
+#branding {
+  width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+#main {
+  width: 960px;
+  margin: 0 auto;
+}
+#primary {
+  float: left;
+  margin: 0 -310px 0 0;
+  width: 100%;
+}
+#content {
+  margin: 0 330px 0 0;
+  border-right: 1px solid rgba(140, 105, 105, 0.2);
+  padding-right: 30px;
+}
+
+#main .widget-area {
+  float: right;
+  width: 300px;
+}
+#main .widget {
+  clear: both;
+  border-top: 1px solid rgba(140, 105, 105, 0.2); 
+  margin: 0 0 30px 0; 
+  padding-top: 30px;
+}
+#main .widget:first-child {
+  border-top: 0; 
+  padding-top: 0;
+}
+#colophon {
+  clear: both;
+  display: block;
+  width: 960px;
+  margin: 0 auto;
+}
+
+/* Increase the size of the content area for templates without sidebars */
+.full-width #content,
+.image-attachment #content,
+.error404 #content {
+  margin: 0;
+  border-right: 0;
+  padding-right: 0;
+}
+.full-width #comments,
+.image-attachment #comments {
+  margin: 0 330px 0 0;
+}
+
+/* Alignment */
+.alignleft {
+  display: inline;
+  float: left;
+}
+.alignright {
+  display: inline;
+  float: right;
+}
+.aligncenter {
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/*
+ *
+ * Header
+ *
+ */
+#site-title {
+  font-family: Satisfy;
+  font-size: 81px;
+  font-weight: normal;
+  text-shadow: -1px 1px 0px #fff;
+  padding: 0 5px;
+  margin: 0;
+}
+#site-title a {
+  text-decoration: none;
+}
+#site-title a:hover {
+  color: #4d68e9;
+  text-shadow: -1px 1px 0px #fff, -1px 1px 3px #deff40, -1px 1px 20px #f4ffbf;
+}
+#site-description {
+  font-family: "Shadows Into Light";
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0 0 30px;
+}
+#user-nav {
+  font-weight: bold;
+  text-align: right;
+  position: absolute;
+  right: 0;
+  top: 3.4em;
+}
+.loginout {
+  display: block;
+  font-size: 11px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.loginout a {
+  text-decoration: none;
+  color: #ff5959;
+}
+.loginout a:hover {
+  text-decoration: underline;
+}
+
+
+/*
+ *
+ * Menu
+ *
+ */
+#access {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background: url(images/texture-dark.png) 0 0 repeat scroll;
+  padding: 4px 0 0;
+}
+#access ul {
+  float: left;
+  background: url(images/shadow.png) right top repeat-y scroll;
+  padding: 5px 15px 15px;
+}
+#access li {
+  float: left;
+  padding: 0 15px;
+}
+#access a {
+  color: #f4ffbf;
+  text-decoration: none;
+}
+#access a:hover {
+  color: #deff40;
+  text-shadow: -1px 1px 0px #202540;
+}
+#access ul ul {
+}
+#access ul ul ul {
+}
+#access ul ul a {
+}
+#access li:hover > a,
+#access ul ul :hover > a {
+}
+#access ul ul a:hover {
+}
+#access ul li:hover > ul {
+}
+
+#footer-nav {
+  float: right; 
+  line-height: 2;
+}
+#footer-nav li {
+  float: left;
+  padding: 0 15px;
+}
+#footer-nav a {
+  color: #f4ffbf;
+  text-decoration: none;
+}
+#footer-nav a:hover {
+  color: #deff40;
+  text-shadow: -1px 1px 0px #202540;
+}
+
+/*
+ *
+ * Content
+ *
+ */
+.page-title {
+  margin-bottom: 1em;
+}
+#content ul,
+#content ol,
+#content li {
+  margin-bottom: 0.75em;
+}
+.hentry {
+  margin-bottom: 30px;
+}
+.entry-header {
+  margin-bottom: 20px;
+}
+.type-point .entry-header {
+  padding-left: 40px;
+  background: url(leaflet/images/marker-4d68e9.png) 0 0.5em no-repeat scroll;
+}
+.entry-title {
+  font-size: 36px;
+  margin-bottom: 0.25em;
+}
+.entry-title a {
+  text-decoration: none;
+}
+.entry-meta {
+  color: #8c6969;
+}
+.entry-meta a {
+  color: #ff5959;
+  text-decoration: none;
+}
+.entry-meta a:hover {
+  text-decoration: underline;
+}
+#content nav {
+  display: block;
+  overflow: hidden;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#content nav a {
+  text-decoration: none;
+}
+#content nav .nav-previous {
+  float: left;
+  width: 50%;
+}
+#content nav .nav-next {
+  float: right;
+  text-align: right;
+  width: 50%;
+}
+#content #nav-above {
+  display: none;
+}
+.paged #content #nav-above {
+  display: block;
+  padding: 15px 0;
+  border-top: 1px solid rgba(140, 105, 105, 0.2);
+}
+#nav-below {
+  margin: 30px 0;
+  padding: 15px 0;
+  border-top: 1px solid rgba(140, 105, 105, 0.2);
+  border-bottom: 1px solid rgba(140, 105, 105, 0.2);
+}
+.page-link {
+  margin: 0 0 1em;
+}
+
+.hentry pre {
+  display: block;
+//  color: #8c6969;
+  color: #ddd;
+  background: url(images/texture-dark.png) 0 0 repeat scroll;
+  padding: 10px;
+  margin-bottom: 1.5em;
+  max-height: 10em;
+  overflow: auto;
+}
+
+/*
+ *
+ * Archives
+ *
+ */
+.archive .hentry {
+  border-top: 1px solid rgba(140, 105, 105, 0.2); 
+  margin-bottom: 30px;
+  padding-top: 20px;
+}
+
+/*
+ *
+ * Images
+ *
+ */
+/*
+Resize images to fit the main content area.
+- Applies only to images uploaded via WordPress by targeting size-* classes.
+- Other images will be left alone. Use "size-auto" class to apply to other images.
+*/
+img.size-auto,
+img.size-full,
+img.size-large,
+img.size-medium,
+.attachment img,
+.widget-area .widget img {
+  max-width: 100%; /* When images are too wide for containing element, force them to fit. */
+  height: auto; /* Override height to match resized width for correct aspect ratio. */
+}
+img.alignleft {
+  margin-right: 1em;
+}
+img.alignright {
+  margin-left: 1em;
+}
+.wp-caption {
+  padding: .5em;
+  text-align: center;
+}
+.wp-caption img {
+  margin: .25em;
+}
+.wp-caption .wp-caption-text {
+  margin: .5em;
+}
+
+/* Forms - Class for labelling required form items */
+.required {
+  color: #ff5959;
+}
+
+
+/*
+ *
+ * Comments
+ *
+ */
+body.page #comments {
+  padding-top: 20px;
+  border-top: 1px solid rgba(140, 105, 105, 0.2);
+}
+#comments-title {
+}
+.commentlist {
+  list-style: none;
+  margin-left: 0;
+}
+.commentlist .children {
+  list-style: none;
+}
+article.comment,
+.commentlist #respond {
+  display: block;
+  margin: 0 0 30px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid rgba(140, 105, 105, 0.2);
+}
+.comment-author .avatar {
+  float: left;
+  margin: 0 20px 0 0;
+}
+.commentmetadata {
+  margin-bottom: 20px;
+  font-size: 11px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.commentmetadata a {
+  text-decoration: none;
+}
+a.comment-reply-link {
+  float: right;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  line-height: 3em;
+  padding: 0 1em;
+  text-decoration: none;
+  background: #FF5959;
+  color: #fff;
+  text-shadow: 1px -1px 0px #8c6969;
+}
+a.comment-reply-link:hover {
+  color: #f4ffbf;
+}
+#respond input[type=text] {
+  float: left;
+  margin: 0 1em 0 0;
+  width: 60%;
+}
+#respond .comment-form-comment label {
+  display: none;
+}
+#respond textarea {
+  margin: 0 1em 1em 0;
+  float: left;
+  width: 80%;
+}
+#respond .form-allowed-tags {
+  clear: both;
+  width: 80%;
+}
+#respond .form-allowed-tags code {
+  display: block;
+}
+.comment-notes {
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.comment-notes .required {
+  font-size: 16px;
+}
+.form-allowed-tags {
+  font-size: 11px;
+}
+
+/*
+ *
+ * Footer
+ *
+ */
+#colophon {
+  padding: 30px 0 60px;
+  color: #dadce5;
+}
+#colophon a {
+  color: #f4ffbf;
+}
+#site-credits {
+  float: left;
+  font-family: "Shadows Into Light";
+  font-size: 24px;
+}
+
+/*
+ *
+ * Links, Buttons, & Forms
+ *
+ */
+a.callout {
+  font-family: "Shadows Into Light";
+  font-size: 36px;
+  font-weight: normal;
+  color: #FF5959;
+  text-decoration: none;
+}
+.title a {
+  text-decoration: none;
+}
+.title a:hover {
+  text-decoration: underline;
+}
+.comments-link a,
+.votes-link a {
+  color: #ff5959;
+  text-decoration: none;
+}
+.comments-link a {
+  background: url(images/balloon-24.png) left center no-repeat scroll;
+  padding-left: 28px;
+}
+.votes-link a {
+  background: url(images/heart-16.png) left center no-repeat scroll;
+  padding-left: 20px;
+}
+.comments-link a:hover,
+.votes-link a:hover {
+  text-decoration: underline;
+}
+a.bttn,
+input.bttn,
+#submit {
+  display: block;
+  height: 50px;
+  margin: 0 0 20px;
+  padding: 0 30px;
+  color: #fff;
+  background: #ff5959;
+  border: 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 1px -1px 0px #8c6969;
+  white-space: nowrap;
+    -moz-box-shadow: -4px 4px 0px rgba(105, 111, 140, 0.25);
+ -webkit-box-shadow: -4px 4px 0px rgba(105, 111, 140, 0.25);
+         box-shadow: -4px 4px 0px rgba(105, 111, 140, 0.25);
+}
+a.bttn:hover,
+input.bttn:hover,
+#submit:hover {
+  color: #f4ffbf;
+}
+a.bttn:active,
+input.bttn:active,
+#submit:active {
+  position: relative;
+  right: 4px;
+  top: 4px;
+    -moz-box-shadow: 1px -1px 0px rgba(105, 111, 140, 0.5);
+ -webkit-box-shadow: 1px -1px 0px rgba(105, 111, 140, 0.5);
+         box-shadow: 1px -1px 0px rgba(105, 111, 140, 0.5);
+}
+input[type=text],
+input[type=password] {
+  background-color: rgba(105, 111, 140, 0.25);
+  border: 0;
+  font-size: 16px;
+  line-height: 30px;
+  height: 30px;
+  width: 90%;
+  padding: 0 10px;
+    -moz-box-shadow: inset -4px 4px 0px rgba(105, 111, 140, 0.2);
+ -webkit-box-shadow: inset -4px 4px 0px rgba(105, 111, 140, 0.2);
+         box-shadow: inset -4px 4px 0px rgba(105, 111, 140, 0.2);
+}
+textarea {
+  background-color: rgba(105, 111, 140, 0.25);
+  border: 0;
+  font-size: 16px;
+  height: 100px;
+  overflow: auto;
+  width: 90%;
+  padding: 5px 10px;
+    -moz-box-shadow: inset -4px 4px 0px rgba(105, 111, 140, 0.2);
+ -webkit-box-shadow: inset -4px 4px 0px rgba(105, 111, 140, 0.2);
+         box-shadow: inset -4px 4px 0px rgba(105, 111, 140, 0.2);
+}
+form p {
+  margin-bottom: 10px;
+}
+  /* clearfix form paragraphs */
+  form p:before, form p:after { content: "\0020"; display: block; height: 0; visibility: hidden; } 
+  form p:after { clear: both; }
+  form p { zoom: 1; }
+
+.remember-me {
+  font-size: 11px;
+  line-height: 50px;
+  text-transform: uppercase;
+}
+.register {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.register a {
+  text-transform: uppercase;
+}
+.lost a {
+  font-size: 11px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/*
+ *
+ * Map Page
+ *
+ */
+#map-container {
+  position: relative;
+  background-color: #fff;
+  margin-bottom: 30px;
+  width: 620px;
+  height: 335px;
+  float: left;
+    -moz-box-shadow: -4px 4px 0px rgba(105, 111, 140, 0.25);
+ -webkit-box-shadow: -4px 4px 0px rgba(105, 111, 140, 0.25);
+         box-shadow: -4px 4px 0px rgba(105, 111, 140, 0.25);
+}
+#map {
+  margin: 10px;
+  height: 315px;
+  overflow: hidden;
+}
+
+.single #map-container {
+  width: 100%;
+  height: 220px;
+  overflow: visible;
+  margin-bottom: 40px;
+}
+.single #map {
+  height: 200px;
+  margin-bottom: 40px;
+}
+
+.single #map-container.tall {
+  height: 335px;
+}
+.single #map-container.tall #map {
+  height: 315px;
+}
+
+#map-w-sizer,
+#map-h-sizer {
+  display: block;
+  position: absolute;
+  text-align: center;
+  font-size: 7px;
+  text-decoration: none;
+  color: #fff;
+  background: #bfcaff;
+  cursor: pointer;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
+    -moz-box-shadow: -2px 2px 0px rgba(105, 111, 140, 0.25);
+ -webkit-box-shadow: -2px 2px 0px rgba(105, 111, 140, 0.25);
+         box-shadow: -2px 2px 0px rgba(105, 111, 140, 0.25);
+}
+#map-w-sizer {
+  top: 50%;
+  right: 100%;
+  width: 2em;
+  line-height: 4em;
+  margin: -2em -2px;
+  border-right: 2px solid #fff;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+}
+#map-h-sizer {
+  top: 100%;
+  left: 50%;
+  width: 4em;
+  line-height: 2em;
+  margin: -2px -2em;
+  border-top: 2px solid #fff;
+  -webkit-border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-right-radius: 4px;
+}
+#map-w-sizer:hover,
+#map-h-sizer:hover {
+  background: #4D68E9;
+}
+
+#thankyoumessage {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px 10px;
+  color: #8C6969;
+  background: #fff;
+  font-family: "Shadows Into Light";
+  font-size: 24px;
+  font-weight: normal;
+}
+
+#map-ui {
+  float: right;
+  width: 300px;
+  position: relative;
+}
+#add-a-point,
+#confirm-point,
+#confirm-point-disabled {
+  position: relative;
+  height: 80px;
+  font-size: 36px;
+  line-height: 80px;
+  margin: 0 0 30px;
+}
+#confirm-point-disabled {
+  cursor: default;
+  color: #ffe0e0;
+  background-color: #ffbfbf;
+  text-shadow: 1px -1px 0px #e5b8b8;
+}
+#confirm-point-disabled:active {
+    -moz-box-shadow: 1px -1px 0px rgba(229, 184, 184, 1);
+ -webkit-box-shadow: 1px -1px 0px rgba(229, 184, 184, 1);
+         box-shadow: 1px -1px 0px rgba(229, 184, 184, 1);
+}
+#unconfirm {
+  color: #ff5959;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 1em;
+}
+#unconfirm span {
+  font-size: 1.6em;
+  font-weight: bold;
+  position: relative;
+  top: 0.05em;
+  margin: 0 0.125em 0 0.75em;
+}
+
+.tooltip {
+  font-family: "Shadows Into Light";
+  font-size: 24px;
+  line-height: 1.2;
+  text-align: center;
+  color: #8C6969;
+}
+
+.my-points {
+  height: 225px;
+  overflow: auto;
+}
+ul.points {
+  list-style: none;
+  margin: 0;
+}
+ul.points li {
+  margin-bottom: 0.75em;
+}
+ul.points .title {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+ul.points .date {
+  font-size: 11px;
+  text-transform: uppercase;
+}
+ul.points .comments-link {
+  margin-right: 10px;
+}
+.my-points-empty {
+  font-family: "Shadows Into Light";
+  font-size: 24px;
+  line-height: 1.7;
+  text-align: center;
+  color: #8C6969;
+}
+.call-to-action {
+  color: #8c6969;
+  font-size: 54px;
+  line-height: 60px;
+  margin-bottom: 20px;
+}
+#sign-in {
+  float: left;
+  margin-right: 20px;
+}
+.page-template-page-map-php #primary {
+  padding-top: 30px;
+  border-top: 1px solid rgba(140, 105, 105, 0.2);
+}
+.page-template-page-map-php #secondary {
+  padding-top: 31px;
+}
+/* Popups */
+.leaflet-popup-content h6 {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 0.25em;
+}
+.leaflet-popup-content h6 a {
+  text-decoration: none;
+}
+.leaflet-container a {
+  color: #4d68e9;
+}
+.leaflet-popup-content .post-meta {
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+}
+.leaflet-popup-content .post-content {
+  font-size: 16px;
+  color: #696f8c; 
+  padding-right: 0.25em;
+  max-height: 120px;
+  overflow: auto;
+}
+
+/*
+ *
+ * Base Print Styles, inline to save the HTTP request
+ *
+ */
+@media print {
+  * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a:after { content: " (" attr(href) ")"; } 
+  abbr:after { content: " (" attr(title) ")"; }
+  .ir a:after { content: ""; }  /* Don't show links for images */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */ 
+  tr, img { page-break-inside: avoid; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
+}
