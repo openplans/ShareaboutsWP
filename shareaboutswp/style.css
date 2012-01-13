@@ -899,6 +899,15 @@ ul.points .date {
 ul.points .comments-link {
   margin-right: 10px;
 }
+ul.points .taxonomy {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: rgba(105, 111, 140, 0.25);
+  padding: 0.25em 0.5em;
+  position: relative;
+  top: -0.25em;
+}
 .my-points-empty {
   font-family: "Shadows Into Light";
   font-size: 24px;

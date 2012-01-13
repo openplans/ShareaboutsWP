@@ -23,7 +23,7 @@ get_header(); ?>
 					</div><!-- .entry-content -->
 				</article><!-- #post-<?php the_ID(); ?> -->
 
-				<?php comments_template( '', true ); ?>
+				<?php if ( comments_open() ) { comments_template( '', true ); } ?>
 
 			</div><!-- #content -->
 		</div><!-- #primary -->

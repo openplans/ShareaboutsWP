@@ -130,7 +130,8 @@ function create_point_cpt() {
     'has_archive' => false,
     'hierarchical' => false,
     'menu_position' => 5,
-    'supports' => array('title','editor','author','comments')
+    'supports' => array('title','editor','author','comments'),
+    'taxonomies' => 'pointtype'
   ); 
   register_post_type('point',$args);
 }
@@ -171,6 +172,39 @@ function location_save_postdata( $post_id ) {
 }
 add_action( 'save_post', 'location_save_postdata' );
 /* ----------------------------------------------------------- end CPT: Point */
+
+/*
+ * Taxonomy: Point Type
+ */
+function create_point_taxonomy() {
+  // Add new taxonomy, NOT hierarchical (like tags)
+  $labels = array(
+    'name' => _x( 'Point Types', 'taxonomy general name' ),
+    'singular_name' => _x( 'Point Type', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Search Point Types' ),
+    'popular_items' => __( 'Popular Point Types' ),
+    'all_items' => __( 'All Point Types' ),
+    'parent_item' => null,
+    'parent_item_colon' => null,
+    'edit_item' => __( 'Edit Point Type' ), 
+    'update_item' => __( 'Update Point Type' ),
+    'add_new_item' => __( 'Add New Point Type' ),
+    'new_item_name' => __( 'New Point Type Name' ),
+    'separate_items_with_commas' => __( 'Separate point types with commas' ),
+    'add_or_remove_items' => __( 'Add or remove point types' ),
+    'choose_from_most_used' => __( 'Choose from the most used point types' ),
+    'menu_name' => __( 'Point Types' ),
+  );
+  register_taxonomy('pointtype','point',array(
+    'hierarchical' => false,
+    'labels' => $labels,
+    'show_ui' => true,
+    'update_count_callback' => '_update_post_term_count',
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'point-type' ),
+  ));
+}
+add_action( 'init', 'create_point_taxonomy', 0 );
 
 /*
  * CPT icons
@@ -225,8 +259,20 @@ function recent_points_display($theme_info){
     <li>
       <h4 class="title"><a class="link" href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'shareabouts' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h4>
       <div>
+        <?php 
+        global $post;
+        $point_terms = wp_get_object_terms($post->ID, 'pointtype');
+        if(!empty($point_terms)){
+          if(!is_wp_error( $point_terms )){
+            echo '<span class="taxonomy">';
+            foreach($point_terms as $term){
+              echo $term->name; 
+            }
+            echo '</span>';
+          }
+        }
+        ?>
         <span class="comments-link"><?php comments_popup_link( __( '0 Replies', 'shareabouts' ), __( '1 Reply', 'shareabouts' ), __( '% Replies', 'shareabouts' ) ); ?></span>
-        <span class="votes-link"><a href="#">3 Votes</a></span>
       </div>
       <div>
         <span class="date">Added by <?php the_author(); ?> on <?php echo get_the_date('j/n/Y'); ?></span>

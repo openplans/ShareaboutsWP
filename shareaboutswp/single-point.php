@@ -47,7 +47,7 @@ get_header(); ?>
 					<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'shareabouts' ) . '</span>' ); ?></div>
 				</nav><!-- #nav-below -->
 
-				<?php comments_template( '', true ); ?>
+				<?php if ( comments_open() ) { comments_template( '', true ); } ?>
 
 			<?php endwhile; // end of the loop. ?>
 

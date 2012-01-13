@@ -9,6 +9,7 @@
 
 $postTitle = $_POST['post_title'];
 $post = $_POST['post'];
+$postPointType = $_POST['post_pointtype'];
 $submit = $_POST['submit'];
 $location = $_POST['post_latlon'];
 $location = str_replace('LatLng(', '', $location);
@@ -23,7 +24,8 @@ if(isset($submit)){
     'post_status' => 'publish',
     'post_date' => date('Y-m-d H:i:s'),
     'post_author' => $user_ID,
-    'post_type' => 'point'
+    'post_type' => 'point',
+    'tax_input' => array( 'pointtype' => array( $postPointType ) )
   );
 
   $newPostID = wp_insert_post($new_post);
@@ -67,8 +69,19 @@ get_header(); ?>
             <li>
               <h4 class="title"><a class="link" href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'shareabouts' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h4>
               <div>
+                <?php 
+                $point_terms = wp_get_object_terms($post->ID, 'pointtype');
+                if(!empty($point_terms)){
+                  if(!is_wp_error( $point_terms )){
+                    echo '<span class="taxonomy">';
+                    foreach($point_terms as $term){
+                      echo $term->name; 
+                    }
+                    echo '</span>';
+                  }
+                }
+                ?>
                 <span class="comments-link"><?php comments_popup_link( __( '0 Replies', 'shareabouts' ), __( '1 Reply', 'shareabouts' ), __( '% Replies', 'shareabouts' ) ); ?></span>
-                <span class="votes-link"><a href="#">3 Votes</a></span>
               </div>
               <div>
                 <span class="date">Added on <?php echo get_the_date('j/n/Y'); ?></span>
@@ -86,6 +99,19 @@ get_header(); ?>
           <p><label for="post_title" class="hidden">Title</label><input name="post_title" type="text" placeholder="Title" /></p>
           <p><label for="post" class="hidden">Comment</label><input name="post" type="text" placeholder="Comment" /></p>
           <p><input id="post_latlon" name="post_latlon" type="text" readonly="readonly" /></p>
+          <p><?php
+          $terms = get_terms( 'pointtype', array(
+            'hide_empty' => 0
+          ));
+          $count = count($terms);
+          if ( $count > 0 ){
+            echo '<select id="post_pointtype" name="post_pointtype">';
+            foreach ( $terms as $term ) {
+              echo '<option value="' . $term->slug . '">' . $term->name . '</option>';
+            }
+            echo "</select>";
+          }
+          ?></p>
           <input name="submit" type="submit" value="Submit" class="bttn" />
           <?php wp_nonce_field( 'new-point' ); ?>
         </form>
@@ -127,7 +153,7 @@ get_header(); ?>
 					</div><!-- .entry-content -->
 				</article><!-- #post-<?php the_ID(); ?> -->
 
-				<?php comments_template( '', true ); ?>
+				<?php if ( comments_open() ) { comments_template( '', true ); } ?>
 
 			</div><!-- #content -->
 		</div><!-- #primary -->
